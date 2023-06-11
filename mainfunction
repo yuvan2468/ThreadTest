@@ -1,0 +1,57 @@
+import java.io.*;
+import java.lang.Thread;
+class A extends Thread
+{
+  public void run()
+{
+  int i=0,j=2,k;
+  for(i=1;i<=4;i++)
+{
+  k=i*j;
+  System.out.println("from thread A:"+i+"*"+j+"="+k);
+}
+  System.out.println("Exit from A");
+}}
+class B extends Thread
+{
+  public void run()
+{
+  int a,b=3,c;
+  for(a=1;a<=4;a++)
+{
+  c=a*b;
+  System.out.println("from thread B:"+a+"*"+b+"="+c);
+}
+  System.out.println("Exit from B");
+}}
+class C extends Thread
+{
+  public void run()
+{
+  int x,y=5,z;
+  for(x=1;x<=4;x++)
+{
+  z=x*y;
+  System.out.println("from thread C:"+x+"*"+y+"="+z);
+}
+  System.out.println("Exit from C");
+}}
+  class ThreadTest
+{
+  public static void main(String args[])
+{
+  int x=0;
+  A threadA=new A();
+  B threadB=new B();
+  C threadC=new C();
+  threadC.setPriority(Thread.MAX_PRIORITY);
+  threadB.setPriority(threadA.getPriority()+x);
+  threadC.setPriority(Thread.MIN_PRIORITY);
+  threadB.setPriority(threadA.getPriority()+x);
+  threadC.setPriority(Thread.MIN_PRIORITY);
+  System.out.println("strart thread A");
+  threadA.start();
+  System.out.println("start thread B");
+  threadB.start();
+  System.out.println("start thread C");
+}}
